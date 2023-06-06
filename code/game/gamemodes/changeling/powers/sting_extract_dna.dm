@@ -17,7 +17,7 @@
 		to_chat(my_mob, SPAN("changeling", "That species must be absorbed directly."))
 		return
 
-	var/datum/absorbed_dna/newDNA = new(target.real_name, target.dna, target.species.name, target.languages, target.modifiers, target.flavor_texts)
+	var/datum/absorbed_dna/newDNA = new(target.real_name, target.dna, target.species.name, target.languages, target.modifiers, target.flavor_text)
 	changeling.absorbDNA(newDNA)
 
 	feedback_add_details("changeling_powers", "ED")

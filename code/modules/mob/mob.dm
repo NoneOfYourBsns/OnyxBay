@@ -399,34 +399,12 @@
 	if (popup)
 		memory()
 
-/mob/proc/update_flavor_text()
-	set src in usr
-	if(usr != src)
-		to_chat(usr, "No.")
-	var/msg = sanitize(input(usr,"Set the flavor text in your 'examine' verb. Can also be used for OOC notes about your character.","Flavor Text",html_decode(flavor_text)) as message|null, extra = 0)
-
-	if(msg != null)
-		flavor_text = msg
-
-/mob/proc/warn_flavor_changed()
-	if(flavor_text && flavor_text != "") // don't spam people that don't use it!
-		to_chat(src, "<h2 class='alert'>OOC Warning:</h2>")
-		to_chat(src, "<span class='alert'>Your flavor text is likely out of date! <a href='byond://?src=\ref[src];flavor_change=1'>Change</a></span>")
-
 /mob/proc/print_flavor_text()
-	if (flavor_text && flavor_text != "")
+	if(length(flavor_text))
 		var/msg = replacetext(flavor_text, "\n", " ")
 		if(length(msg) <= 40)
-			return "<span class='notice'>[msg]</span>"
-		else
-			return "<span class='notice'>[copytext_preserve_html(msg, 1, 37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a></span>"
-
-/*
-/mob/verb/help()
-	set name = "Help"
-	show_browser(src, 'html/help.html', "window=help")
-	return
-*/
+			return SPAN_NOTICE(msg)
+		return SPAN_NOTICE("[copytext_preserve_html(msg, 1, 40)]... <a href='byond://?src=\ref[src];flavor_more=1'>Look closer?")
 
 /client/verb/changes()
 	set name = "Changelog"
@@ -530,11 +508,8 @@
 	if(href_list["flavor_more"])
 		show_browser(usr, text("<HTML><meta charset=\"utf-8\"><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", name, replacetext(flavor_text, "\n", "<BR>")), text("window=[];size=500x200", name))
 		onclose(usr, "[name]")
-	if(href_list["flavor_change"])
-		update_flavor_text()
 
-//	..()
-	return
+	return ..()
 
 /mob/proc/pull_damage()
 	return 0

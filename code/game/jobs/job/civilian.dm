@@ -46,8 +46,6 @@
 		H.dna.real_name = new_name
 		H.mind?.name = new_name
 		H.flavor_text = ""
-		for(var/thing in H.flavor_texts)
-			H.flavor_texts[thing] = null
 
 /datum/job/hydro
 	title = "Gardener"

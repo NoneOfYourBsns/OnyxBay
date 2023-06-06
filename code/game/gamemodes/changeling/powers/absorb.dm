@@ -87,7 +87,7 @@
 	if(T.vessel)
 		T.vessel.remove_any(T.vessel.total_volume)
 
-	var/datum/absorbed_dna/newDNA = new(T.real_name, T.dna, T.species.name, T.languages, T.modifiers, T.flavor_texts)
+	var/datum/absorbed_dna/newDNA = new(T.real_name, T.dna, T.species.name, T.languages, T.modifiers, T.flavor_text)
 	changeling.absorbDNA(newDNA)
 	if(my_mob.mind && T.mind)
 		my_mob.mind.store_memory("[T.real_name]'s memories:")

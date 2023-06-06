@@ -52,7 +52,7 @@
 	// If called by a human, acquire their DNA.
 	var/mob/living/carbon/human/H = src
 	if(istype(H))
-		var/datum/absorbed_dna/newDNA = new(H.real_name, H.dna, H.species.name, H.languages, H.modifiers, H.flavor_texts)
+		var/datum/absorbed_dna/newDNA = new(H.real_name, H.dna, H.species.name, H.languages, H.modifiers, H.flavor_text)
 		changeling.absorbDNA(newDNA)
 
 	return TRUE

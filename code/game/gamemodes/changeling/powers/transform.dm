@@ -60,7 +60,7 @@
 		var/mob/living/carbon/human/H = my_mob
 		var/newSpecies = chosen_dna.speciesName
 		H.modifiers = chosen_dna.modifiers
-		H.flavor_texts = chosen_dna.flavor_texts
+		H.flavor_text = chosen_dna.flavor_text
 		var/datum/species/newS_dat = all_species[newSpecies]
 		if(H.mob_size != newS_dat.mob_size)
 			for (var/obj/item/underwear/U in H.worn_underwear)

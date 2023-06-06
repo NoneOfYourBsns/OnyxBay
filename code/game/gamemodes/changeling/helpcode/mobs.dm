@@ -300,7 +300,7 @@
 	target.sync_organ_dna()
 	target.regenerate_icons()
 
-	var/datum/absorbed_dna/newDNA = new(target.real_name, target.dna, target.species.name, target.languages, target.modifiers, target.flavor_texts)
+	var/datum/absorbed_dna/newDNA = new(target.real_name, target.dna, target.species.name, target.languages, target.modifiers, target.flavor_text)
 	changeling.absorbDNA(newDNA)
 	if(mind && target.mind)
 		mind.store_memory("[target.real_name]'s memories:")
