@@ -192,6 +192,7 @@
 	var/weakened = 0
 	var/drowsyness = 0.0//Carbon
 
+	var/pose = ""
 	var/memory = ""
 	var/flavor_text = ""
 	var/datum/browser/show_inventory

@@ -323,8 +323,16 @@
 		msg += SPAN("deptradio", "Mental status:") + " <a href='?src=\ref[src];mental=1'>\[[mental]\]</a>\n"
 		msg += SPAN("deptradio", "Medical records:") + " <a href='?src=\ref[src];medrecord=`'>\[View\]</a>\n"
 
+	var/face_obscured = (wear_mask && (wear_mask.flags_inv & HIDEFACE) || head && (head.flags_inv & HIDEFACE))
+	var/flavor_preview = copytext_char(flavor_text, 1, 40)
+	var/flavor_preview_link
 
-	if(print_flavor_text()) msg += "[print_flavor_text()]\n"
+	if(!face_obscured && flavor_preview)
+		flavor_preview_link = SPAN_NOTICE("[flavor_preview]... <a href='byond://?src=\ref[src];flavor_more=1'>Look closer?</a>")
+	else
+		flavor_preview_link = SPAN_NOTICE("<a href='byond://?src=\ref[src];flavor_more=1'>Look closer?</a>")
+
+	msg += flavor_preview_link
 
 	msg += applying_pressure
 
@@ -349,18 +357,3 @@
 		if (R.active_hud == hudtype)
 			return TRUE
 	return FALSE
-
-/mob/living/carbon/human/verb/pose()
-	set name = "Set Pose"
-	set desc = "Sets a description which will be shown when someone examines you."
-	set category = "IC"
-
-	pose = sanitize(input(usr, "This is [src]. [get_visible_gender() == MALE ? "He" : get_visible_gender() == FEMALE ? "She" : "They"]...", "Pose", null) as text)
-
-/mob/living/carbon/human/verb/set_flavor()
-	set name = "Set Flavor Text"
-	set desc = "Sets an extended description of your character's features."
-	set category = "IC"
-
-	var/new_flavor = sanitize(input(usr, "Set the flavor text for your character.", "Flavor Text", html_decode(flavor_text)) as message, extra = 0)
-	flavor_text = new_flavor

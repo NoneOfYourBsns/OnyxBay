@@ -31,13 +31,14 @@
 	return
 
 /mob/living/get_description_fluff()
-	if(flavor_text) //Get flavor text for the green text.
+	if(flavor_text)
 		return flavor_text
-	else //No flavor text?  Try for hardcoded fluff instead.
-		return ..()
+	return ..()
 
 /mob/living/carbon/human/get_description_fluff()
-	return print_flavor_text(0)
+	if(wear_mask && (wear_mask.flags_inv & HIDEFACE) || head && (head.flags_inv & HIDEFACE))
+		return ""
+	return flavor_text
 
 /* The examine panel itself */
 

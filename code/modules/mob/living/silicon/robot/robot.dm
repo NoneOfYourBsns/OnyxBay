@@ -102,6 +102,8 @@
 	var/footstep_sound = null
 
 	var/list/robot_verbs_default = list(
+		/mob/proc/set_pose,
+		/mob/proc/set_flavor,
 		/mob/living/silicon/robot/proc/sensor_mode,
 		/mob/living/silicon/robot/proc/robot_checklaws,
 		/mob/living/silicon/robot/proc/ResetSecurityCodes

@@ -5,7 +5,7 @@
 	var/msg = ""
 	msg += "\n"
 	msg += examine_all_modules()
-	
+
 	msg += "<span class='warning'>"
 	if (getBruteLoss())
 		if (getBruteLoss() < 75)
@@ -35,9 +35,15 @@
 			msg += "<span class='warning'>It doesn't seem to be responding.</span>\n"
 		if(DEAD)
 			msg += "<span class='deadsay'>It's broken, but looks repairable.</span>\n"
-	msg += "*---------*"
+	msg += "*---------*\n"
 
-	if(print_flavor_text()) msg += "\n[print_flavor_text()]\n"
+	var/flavor_preview = copytext_char(flavor_text, 1, 40)
+	var/flavor_preview_link
+
+	if(flavor_preview)
+		flavor_preview_link = SPAN_NOTICE("[flavor_preview]... <a href='byond://?src=\ref[src];flavor_more=1'>Look closer?</a>")
+
+	msg += flavor_preview_link
 
 	if (pose)
 		if( findtext(pose,".",length(pose)) == 0 && findtext(pose,"!",length(pose)) == 0 && findtext(pose,"?",length(pose)) == 0 )

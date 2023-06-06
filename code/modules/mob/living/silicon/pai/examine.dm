@@ -9,11 +9,4 @@
 		if(DEAD)			msg += "\n<span class='deadsay'>It looks completely unsalvageable.</span>"
 	msg += "\n*---------*"
 
-	if(print_flavor_text()) msg += "\n[print_flavor_text()]\n"
-
-	if (pose)
-		if( findtext(pose,".",length(pose)) == 0 && findtext(pose,"!",length(pose)) == 0 && findtext(pose,"?",length(pose)) == 0 )
-			pose = addtext(pose,".") //Makes sure all emotes end with a period.
-		msg += "\nIt is [pose]"
-
 	. += "\n[msg]"

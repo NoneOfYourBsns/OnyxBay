@@ -22,6 +22,8 @@
 	var/list/grasp_limbs
 
 /mob/living/carbon/human/New(new_loc, new_species = null)
+	verbs += /mob/proc/set_pose
+	verbs += /mob/proc/set_flavor
 
 	grasp_limbs = list()
 	stance_limbs = list()
@@ -1261,12 +1263,6 @@
 			else
 				to_chat(user, "<span class='warning'>There is no exposed flesh or thin material on [src]'s [affecting.name] to inject into.</span>")
 				return 0
-
-
-/mob/living/carbon/human/print_flavor_text(shrink = TRUE)
-	if(!shrink)
-		return flavor_text
-	return ..()
 
 /mob/living/carbon/human/getDNA()
 	if(species.species_flags & SPECIES_FLAG_NO_SCAN)

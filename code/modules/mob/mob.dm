@@ -375,6 +375,7 @@
 		mind.show_memory(src)
 	else
 		to_chat(src, "The game appears to have misplaced your mind datum, so we can't show you your notes.")
+
 /mob/verb/add_memory(msg as message)
 	set name = "Add Note"
 	set category = "IC"
@@ -385,6 +386,7 @@
 		mind.store_memory(msg)
 	else
 		to_chat(src, "The game appears to have misplaced your mind datum, so we can't show you your notes.")
+
 /mob/proc/store_memory(msg as message, popup, sane = 1)
 	msg = copytext(msg, 1, MAX_MESSAGE_LEN)
 
@@ -399,12 +401,21 @@
 	if (popup)
 		memory()
 
-/mob/proc/print_flavor_text()
-	if(length(flavor_text))
-		var/msg = replacetext(flavor_text, "\n", " ")
-		if(length(msg) <= 40)
-			return SPAN_NOTICE(msg)
-		return SPAN_NOTICE("[copytext_preserve_html(msg, 1, 40)]... <a href='byond://?src=\ref[src];flavor_more=1'>Look closer?")
+/mob/proc/set_pose()
+	set name = "Set Pose"
+	set desc = "Sets a description which will be shown when someone examines you."
+	set category = "IC"
+
+	var/new_pose = sanitize(input(usr, "Set the pose for your character.", "Pose", null) as text)
+	pose = new_pose
+
+/mob/proc/set_flavor()
+	set name = "Set Flavor Text"
+	set desc = "Sets an extended description of your character's features."
+	set category = "IC"
+
+	var/new_flavor = sanitize(input(usr, "Set the flavor text for your character.", "Flavor Text", html_decode(flavor_text)) as message, extra = 0)
+	flavor_text = new_flavor
 
 /client/verb/changes()
 	set name = "Changelog"
@@ -1062,6 +1073,7 @@
 			to_chat(usr, "The game is not currently looking for antags.")
 	else
 		to_chat(usr, "You must be observing or in the lobby to join the antag pool.")
+
 /mob/proc/is_invisible_to(mob/viewer)
 	return (!alpha || !mouse_opacity || viewer.see_invisible < invisibility)
 
