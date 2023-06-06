@@ -15,6 +15,11 @@
 	var/obj/master = null    //A reference to the object in the slot. Grabs or items, generally.
 	var/globalscreen = FALSE //Global screens are not qdeled when the holding mob is destroyed.
 
+	/// Map name assigned to this object
+	var/assigned_map
+	/// Mark this object as garbage-collectible after cleaning the map it was registered on
+	var/del_on_map_removal = TRUE
+
 /obj/screen/Destroy()
 	master = null
 	return ..()

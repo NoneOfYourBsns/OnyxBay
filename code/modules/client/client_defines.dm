@@ -73,3 +73,6 @@
 
 	/// Whether typing indicators are enabled
 	var/typing_indicators
+
+	/// Associative list with all active maps
+	var/list/screen_maps = list()
