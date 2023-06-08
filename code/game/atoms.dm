@@ -304,15 +304,12 @@ its easier to just keep the beam vertical.
 
 	return
 
-/atom/proc/examine(...)
+/atom/proc/examine(mob/user)
 	SHOULD_NOT_OVERRIDE(TRUE)
 
-	var/content = "<div class='Examine'>"
+	. = EXAMINE_BLOCK(_examine_text(user))
 
-	content += _examine_text(arglist(args))
-	content += "</div>"
-
-	return content
+	SEND_SIGNAL(src, SIGNAL_PARENT_EXAMINE, user, .)
 
 // called by mobs when e.g. having the atom as their machine, pulledby, loc (AKA mob being inside the atom) or buckled var set.
 // see code/modules/mob/mob_movement.dm for more.
